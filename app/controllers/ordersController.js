@@ -1,17 +1,11 @@
 (function() {
     
-    var OrdersController = function ($scope, $routeParams) {
+    var OrdersController = function ($scope, $routeParams, customersFactory) {
         var customerId = $routeParams.customerId;
-        $scope.orders = null;
-        
+        $scope.customer = null;
         function init() {
             //Search the customers for the customerId
-            for (var i=0,len=$scope.customers.length;i<len;i++) {
-               if ($scope.customers[i].id === parseInt(customerId)) {
-                   $scope.orders = $scope.customers[i].orders;
-                   break;
-               }
-            }
+            $scope.customer = customersFactory.getCustomer(customerId);
         }
         
 
@@ -19,7 +13,7 @@
         init();
     };
     
-    OrdersController.$inject = ['$scope', '$routeParams'];
+    OrdersController.$inject = ['$scope', '$routeParams', 'customersFactory'];
 
     angular.module('customersApp')
       .controller('OrdersController', OrdersController);

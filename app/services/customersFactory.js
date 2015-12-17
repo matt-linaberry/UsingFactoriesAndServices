@@ -67,6 +67,16 @@
       factory.getCustomers = function() {
         return customers;
       };
+        
+        factory.getCustomer = function(customerId) {
+            for (var i=0,len=$scope.customers.length;i<len;i++) {
+               if ($scope.customers[i].id === parseInt(customerId)) {
+                   return customers[i];
+                   break;
+               }
+            }
+            return {};
+        };
       return factory;
     };
   
