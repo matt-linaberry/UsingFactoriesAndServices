@@ -1,5 +1,5 @@
 (function() {
-    var customersFactory = function () {
+    var customersService = function () {
       var customers = [
             {
                 id: 1, 
@@ -63,12 +63,11 @@
                 ]
             }
         ]; 
-      var factory = {}; // this creates an object
-      factory.getCustomers = function() {
+      this.getCustomers = function() {
         return customers;
       };
         
-        factory.getCustomer = function(customerId) {
+        this.getCustomer = function(customerId) {
             for (var i=0,len=customers.length;i<len;i++) {
                if (customers[i].id === parseInt(customerId)) {
                    return customers[i];
@@ -77,9 +76,8 @@
             }
             return {};
         };
-      return factory;
     };
   
   // register this factory with angular
-  angular.module('customersApp').factory('customersFactory', customersFactory);
+  angular.module('customersApp').service('customersService', customersService);
 }());  // doing this way at the end causes this factory to be invoked.
